@@ -1,0 +1,299 @@
+/* ── CSS VARIABLES ─────────────────────────── */
+:root {
+  --primary: #29b6f6;
+  --dark: #222;
+  --orbit-size: 25px;
+}
+
+/* ── RESET ─────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ══════════════ NAVBAR ══════════════ */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 28px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: var(--dark);
+  font-size: 15px;
+}
+
+.nav-links li a:hover {
+  color: var(--primary);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-username {
+  background-color: #e0f3ff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Hamburger hidden on desktop */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--dark);
+}
+
+.hamburger:focus {
+  outline: none;
+}
+
+/* Mobile menu hidden on desktop */
+.mobile-menu {
+  display: none;
+}
+
+/* ══════════════ HERO SECTION ══════════════ */
+.hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 80px;
+  min-height: calc(100vh - 70px);
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 480px;
+}
+
+.hero-text h1 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.hero-text h1 span {
+  color: var(--primary);
+}
+
+.hero-text p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* CTA button with hover transform (previous task) */
+.book-btn {
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #0399d4;
+  transform: scale(1.12) rotate(-6deg);
+}
+
+/* ══════════════ HERO IMAGE ANIMATION ══════════════ */
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Wrapper: moves the image around in a circle (orbit) */
+.orbit {
+  animation: orbit 6s linear infinite;
+}
+
+/* Image: gets squeezed at certain points */
+.orbit img {
+  width: 100%;
+  max-width: 420px;
+  animation: squeeze 3s ease-in-out infinite;
+}
+
+/* Orbit: rotate -> push outwards -> rotate back so the image stays upright */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(var(--orbit-size)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(var(--orbit-size)) rotate(-360deg);
+  }
+}
+
+/* Squeeze: scale width and height differently at different points */
+@keyframes squeeze {
+  0%   { transform: scale(1, 1); }
+  25%  { transform: scale(0.9, 1.1); }
+  50%  { transform: scale(1.1, 0.9); }
+  75%  { transform: scale(0.92, 1.08); }
+  100% { transform: scale(1, 1); }
+}
+
+/* ══════════════ TABLET (max 768px) ══════════════ */
+@media (max-width: 768px) {
+  :root {
+    --orbit-size: 18px;
+  }
+
+  .navbar {
+    padding: 14px 24px;
+  }
+
+  .nav-logo {
+    font-size: 18px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .nav-links li a {
+    font-size: 13px;
+  }
+
+  .nav-username {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .hero {
+    padding: 40px 30px;
+  }
+
+  .hero-text h1 {
+    font-size: 26px;
+  }
+
+  .hero-text p {
+    font-size: 13px;
+  }
+
+  .orbit img {
+    max-width: 300px;
+  }
+}
+
+/* ══════════════ MOBILE (max 480px) ══════════════ */
+@media (max-width: 480px) {
+  :root {
+    --orbit-size: 12px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .navbar {
+    padding: 14px 20px;
+  }
+
+  /* Slide-in menu from the right, shown on button focus (no JS) */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100vh;
+    background-color: #000;
+    z-index: 999;
+    padding-top: 80px;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .mobile-menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .hamburger:focus ~ .mobile-menu {
+    display: block;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 20px;
+    min-height: auto;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .hero-text h1 {
+    font-size: 26px;
+  }
+
+  .hero-text p {
+    font-size: 13px;
+  }
+
+  .book-btn {
+    width: 100%;
+    padding: 14px 28px;
+    font-size: 14px;
+  }
+
+  .hero-image {
+    width: 100%;
+  }
+
+  .orbit img {
+    max-width: 100%;
+  }
+}
